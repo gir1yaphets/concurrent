@@ -8,11 +8,11 @@ public class HashMapTest {
     private boolean running = true;
     private HashMap<String, Integer> people = new HashMap<String, Integer>();
 
-    private void addPerson() {
+    private synchronized void addPerson() {
         people.put(RandomUtils.randomString(), RandomUtils.randomInteger());
     }
 
-    private void deletePeople(String pattern) {
+    private synchronized void deletePeople(String pattern) {
         Vector<String> hasPattern = new Vector<String>();
         for (String key : people.keySet()) {
             if (key.contains(pattern))
@@ -22,7 +22,7 @@ public class HashMapTest {
             people.remove(key);
     }
 
-    private void printPeople() {
+    private synchronized void printPeople() {
         for (HashMap.Entry<String, Integer> entry : people.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
