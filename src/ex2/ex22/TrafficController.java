@@ -1,35 +1,34 @@
 package ex2.ex22;
 
 public class TrafficController {
-    private volatile boolean isLeftCarOnBridge = false;
-    private volatile boolean isRightCarOnBridge = false;
+    private volatile boolean hasCarOnBridge = false;
 
     public synchronized void enterLeft() {
         while (true) {
-            if (!isRightCarOnBridge) {
+            if (!hasCarOnBridge) {
                 break;
             }
         }
 
-        isLeftCarOnBridge = true;
+        hasCarOnBridge = true;
     }
 
     public synchronized void enterRight() {
         while (true) {
-            if (!isLeftCarOnBridge) {
+            if (!hasCarOnBridge) {
                 break;
             }
         }
 
-        isRightCarOnBridge = true;
+        hasCarOnBridge = true;
     }
 
     public void leaveLeft() {
-        isRightCarOnBridge = false;
+        hasCarOnBridge = false;
     }
 
     public void leaveRight() {
-        isLeftCarOnBridge = false;
+        hasCarOnBridge = false;
     }
 
 }
