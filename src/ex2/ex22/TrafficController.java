@@ -3,24 +3,12 @@ package ex2.ex22;
 public class TrafficController {
     private volatile boolean hasCarOnBridge = false;
 
-    public synchronized void enterLeft() {
-        while (true) {
-            if (!hasCarOnBridge) {
-                break;
-            }
-        }
-
-        hasCarOnBridge = true;
+    public void enterLeft() {
+        crossBridge();hasCarOnBridge = true;
     }
 
-    public synchronized void enterRight() {
-        while (true) {
-            if (!hasCarOnBridge) {
-                break;
-            }
-        }
-
-        hasCarOnBridge = true;
+    public void enterRight() {
+        crossBridge();
     }
 
     public void leaveLeft() {
@@ -29,6 +17,16 @@ public class TrafficController {
 
     public void leaveRight() {
         hasCarOnBridge = false;
+    }
+
+    private synchronized void crossBridge() {
+        while (true) {
+            if (!hasCarOnBridge) {
+                break;
+            }
+        }
+
+        hasCarOnBridge = true;
     }
 
 }
