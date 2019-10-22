@@ -1,10 +1,12 @@
 package ex3.ex33;
 
+import java.util.concurrent.LinkedBlockingQueue;
+
 public class Consumer implements Runnable {
-    private ???queue;
+    private LinkedBlockingQueue<Message> queue;
     private int id;
 
-    public Consumer(???, int n) {
+    public Consumer(LinkedBlockingQueue<Message> q, int n) {
         queue = q;
         id = n;
     }
@@ -14,7 +16,7 @@ public class Consumer implements Runnable {
         int count = 0;
         do {
             try {
-                msg = ???; // Get a message from the queue
+                msg = queue.take(); // Get a message from the queue
                 count++;
                 RandomUtils.print("Consumed " + msg.get(), id);
                 Thread.sleep(RandomUtils.randomInteger());

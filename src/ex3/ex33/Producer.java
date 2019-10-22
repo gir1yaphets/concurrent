@@ -1,11 +1,13 @@
 package ex3.ex33;
 
+import java.util.concurrent.LinkedBlockingQueue;
+
 public class Producer implements Runnable {
-    private ???queue;
+    private LinkedBlockingQueue<Message> queue;
     private boolean running = true;
     private int id;
 
-    public Producer(???q, int n) {
+    public Producer(LinkedBlockingQueue<Message> q, int n) {
         queue = q;
         id = n;
     }
@@ -21,7 +23,7 @@ public class Producer implements Runnable {
             try {
                 Thread.sleep(n);
                 Message msg = new Message("message-" + n);
-		???(msg); // Put the message in the queue
+		        queue.put(msg); // Put the message in the queue
                 count++;
                 RandomUtils.print("Produced " + msg.get(), id);
             } catch (InterruptedException e) {
@@ -31,7 +33,7 @@ public class Producer implements Runnable {
         // Put the stop message in the queue
         Message msg = new Message("stop");
         try {
-	    ???(msg); // Put this final message in the queue
+	        queue.put(msg); // Put this final message in the queue
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
