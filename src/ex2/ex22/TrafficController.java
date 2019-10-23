@@ -4,7 +4,7 @@ public class TrafficController {
     private volatile boolean hasCarOnBridge = false;
 
     public void enterLeft() {
-        crossBridge();hasCarOnBridge = true;
+        crossBridge();
     }
 
     public void enterRight() {
